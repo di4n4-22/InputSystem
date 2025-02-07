@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 
 
@@ -13,7 +14,14 @@ public class GameInstaller : MonoBehaviour
     {
         _controls = new Controls();
         _controls.Game.Enable();
+        Container.BindInstance(_controls.Game).AsSingle();
 
+        Container.BindInstance(_cellManager).AsSingle();
+        Container.BindInstance(_controller).AsSingle();
+
+        Container.BindInstance(_cellPalletteSettings).AsSingle();
+
+        _cellManager.OneCellClicked += CellManagerOnOnCellClicked();
     }
 
     private void CellManagerOnOnCellClicked()
